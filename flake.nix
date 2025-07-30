@@ -34,7 +34,7 @@
             "-X github.com/nanoteck137/metainit.Commit=${self.dirtyRev or self.rev or "no-commit"}"
           ];
 
-          vendorHash = "sha256-F/kJ1nD8WBHI3B1vlqWbnLMveqIdIJCML6y/b1U/Rgw=";
+          vendorHash = "sha256-a9o38ir6A3WlV/C8kifKTQPRQhQjyY0YiwXuCxBeEE4=";
 
           nativeBuildInputs = [ pkgs.makeWrapper ];
 
