@@ -18,6 +18,7 @@ import (
 
 	"github.com/charmbracelet/huh"
 	"github.com/gosimple/slug"
+	"github.com/kr/pretty"
 	"github.com/nanoteck137/metainit/watchbook"
 	"github.com/pelletier/go-toml/v2"
 	"github.com/spf13/cobra"
@@ -329,6 +330,8 @@ func runTVMode(client *watchbook.Client, dir, colId string) error {
 	if err != nil {
 		return err
 	}
+
+	pretty.Println(collection)
 
 	tv := TvShow{
 		Title:     collection.Name,
