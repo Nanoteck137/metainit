@@ -141,7 +141,7 @@ func Slug(s string) string {
 type Collection struct {
 	watchbook.GetCollectionById
 
-	Items        [][]watchbook.CollectionItem
+	// Items        [][]watchbook.CollectionItem
 	SearchMapped map[string]watchbook.CollectionItem
 }
 
@@ -156,18 +156,19 @@ func GetCollection(client *watchbook.Client, colId string) (*Collection, error) 
 		return nil, err
 	}
 
-	items := make(map[string]watchbook.CollectionItem)
+	
+	searchMapped := make(map[string]watchbook.CollectionItem)
 
-	for _, order := range rawColItems.Items {
-		for _, item := range order {
-			items[item.SearchSlug] = item
+	for _, group := range rawColItems.Groups {
+		for _, item := range group.Entries {
+			searchMapped[item.SearchSlug] = item
 		}
 	}
 
 	return &Collection{
 		GetCollectionById: *collection,
-		Items:             rawColItems.Items,
-		SearchMapped:      items,
+		// Items:             rawColItems.Groups,
+		SearchMapped:      searchMapped,
 	}, nil
 }
 

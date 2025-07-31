@@ -291,38 +291,6 @@ func (c *Client) GetCollectionItems(id string, options Options) (*GetCollectionI
 	return Request[GetCollectionItems](data, nil)
 }
 
-func (c *Client) CreateCollection(body CreateCollectionBody, options Options) (*CreateCollection, error) {
-	path := "/api/v1/collections"
-	url, err := createUrl(c.addr, path, options.Query)
-	if err != nil {
-		return nil, err
-	}
-
-	data := RequestData{
-		Url: url,
-		Method: "POST",
-		ClientHeaders: c.Headers,
-		Headers: options.Header,
-	}
-	return Request[CreateCollection](data, body)
-}
-
-func (c *Client) EditCollection(id string, body EditCollectionBody, options Options) (*any, error) {
-	path := Sprintf("/api/v1/collections/%v", id)
-	url, err := createUrl(c.addr, path, options.Query)
-	if err != nil {
-		return nil, err
-	}
-
-	data := RequestData{
-		Url: url,
-		Method: "PATCH",
-		ClientHeaders: c.Headers,
-		Headers: options.Header,
-	}
-	return Request[any](data, body)
-}
-
 func (c *Client) ProviderMyAnimeListGetAnime(id string, options Options) (*ProviderMyAnimeListAnime, error) {
 	path := Sprintf("/api/v1/provider/myanimelist/anime/%v", id)
 	url, err := createUrl(c.addr, path, options.Query)
@@ -433,16 +401,6 @@ func (c *ClientUrls) GetCollectionById(id string) (*URL, error) {
 
 func (c *ClientUrls) GetCollectionItems(id string) (*URL, error) {
 	path := Sprintf("/api/v1/collections/%v/items", id)
-	return c.getUrl(path)
-}
-
-func (c *ClientUrls) CreateCollection() (*URL, error) {
-	path := "/api/v1/collections"
-	return c.getUrl(path)
-}
-
-func (c *ClientUrls) EditCollection(id string) (*URL, error) {
-	path := Sprintf("/api/v1/collections/%v", id)
 	return c.getUrl(path)
 }
 
