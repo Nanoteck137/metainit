@@ -12,6 +12,7 @@ import (
 	"os"
 	"os/exec"
 	"path"
+	"path/filepath"
 	"regexp"
 	"strconv"
 	"strings"
@@ -243,7 +244,10 @@ func readMeta(p string) (Meta, error) {
 }
 
 func runCollectionQuery(client *watchbook.Client) (string, error) {
-	var searchQuery string
+	t, _ := filepath.Abs(".")
+	start := path.Base(t)
+
+	searchQuery := start
 	var colId string
 	form := huh.NewForm(
 		huh.NewGroup(
@@ -285,7 +289,10 @@ func runCollectionQuery(client *watchbook.Client) (string, error) {
 }
 
 func runMediaQuery(client *watchbook.Client) (string, error) {
-	var searchQuery string
+	t, _ := filepath.Abs(".")
+	start := path.Base(t)
+
+	searchQuery := start
 	var mediaId string
 	form := huh.NewForm(
 		huh.NewGroup(
