@@ -2,7 +2,97 @@
   "version": 1,
   "structures": [
     {
-      "name": "ApiToken",
+      "name": "CreateApiTokenBody",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "GetAllApiTokens",
+      "fields": [
+        {
+          "name": "tokens",
+          "type": "[]ApiToken",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "GetCollectionItems",
+      "fields": [
+        {
+          "name": "groups",
+          "type": "[]CollectionGroup",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "CollectionGroup",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "order",
+          "type": "int",
+          "omitEmpty": false
+        },
+        {
+          "name": "entries",
+          "type": "[]CollectionItem",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "CreateCollectionBody",
+      "fields": [
+        {
+          "name": "collectionType",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "SigninBody",
+      "fields": [
+        {
+          "name": "username",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "password",
+          "type": "string",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "EditPartBody",
+      "fields": [
+        {
+          "name": "name",
+          "type": "*string",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "Collection",
       "fields": [
         {
           "name": "id",
@@ -10,8 +100,68 @@
           "omitEmpty": false
         },
         {
+          "name": "collectionType",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "coverUrl",
+          "type": "*string",
+          "omitEmpty": false
+        },
+        {
+          "name": "logoUrl",
+          "type": "*string",
+          "omitEmpty": false
+        },
+        {
+          "name": "bannerUrl",
+          "type": "*string",
+          "omitEmpty": false
+        },
+        {
           "name": "name",
           "type": "string",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "AddPartBody",
+      "fields": [
+        {
+          "name": "index",
+          "type": "int",
+          "omitEmpty": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "Page",
+      "fields": [
+        {
+          "name": "page",
+          "type": "int",
+          "omitEmpty": false
+        },
+        {
+          "name": "perPage",
+          "type": "int",
+          "omitEmpty": false
+        },
+        {
+          "name": "totalItems",
+          "type": "int",
+          "omitEmpty": false
+        },
+        {
+          "name": "totalPages",
+          "type": "int",
           "omitEmpty": false
         }
       ]
@@ -32,6 +182,26 @@
         {
           "name": "description",
           "type": "*string",
+          "omitEmpty": false
+        },
+        {
+          "name": "tmdbId",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "imdbId",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "malId",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "anilistId",
+          "type": "string",
           "omitEmpty": false
         },
         {
@@ -75,7 +245,7 @@
           "omitEmpty": false
         },
         {
-          "name": "studios",
+          "name": "creators",
           "type": "[]string",
           "omitEmpty": false
         },
@@ -110,8 +280,13 @@
       "name": "MediaUser",
       "fields": [
         {
+          "name": "hasData",
+          "type": "bool",
+          "omitEmpty": false
+        },
+        {
           "name": "list",
-          "type": "*string",
+          "type": "string",
           "omitEmpty": false
         },
         {
@@ -137,36 +312,171 @@
       ]
     },
     {
-      "name": "GetMediaParts",
+      "name": "EditMediaBody",
       "fields": [
         {
-          "name": "parts",
-          "type": "[]MediaPart",
-          "omitEmpty": false
+          "name": "mediaType",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "tmdbId",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "imdbId",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "malId",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "anilistId",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "title",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "description",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "score",
+          "type": "*float",
+          "omitEmpty": true
+        },
+        {
+          "name": "status",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "rating",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "airingSeason",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "startDate",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "endDate",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "adminStatus",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "tags",
+          "type": "*[]string",
+          "omitEmpty": true
+        },
+        {
+          "name": "creators",
+          "type": "*[]string",
+          "omitEmpty": true
         }
       ]
     },
     {
-      "name": "GetCollectionItems",
+      "name": "ProviderMyAnimeListAnime",
       "fields": [
         {
-          "name": "groups",
-          "type": "[]CollectionGroup",
-          "omitEmpty": false
-        }
-      ]
-    },
-    {
-      "name": "SigninBody",
-      "fields": [
-        {
-          "name": "username",
+          "name": "malId",
           "type": "string",
           "omitEmpty": false
         },
         {
-          "name": "password",
+          "name": "mediaType",
           "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "titleEnglish",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "score",
+          "type": "*float",
+          "omitEmpty": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "rating",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "airingSeason",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "startDate",
+          "type": "*string",
+          "omitEmpty": false
+        },
+        {
+          "name": "endDate",
+          "type": "*string",
+          "omitEmpty": false
+        },
+        {
+          "name": "studios",
+          "type": "[]string",
+          "omitEmpty": false
+        },
+        {
+          "name": "tags",
+          "type": "[]string",
+          "omitEmpty": false
+        },
+        {
+          "name": "coverImageUrl",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "episodeCount",
+          "type": "*int",
+          "omitEmpty": false
+        },
+        {
+          "name": "usingCache",
+          "type": "bool",
           "omitEmpty": false
         }
       ]
@@ -207,51 +517,6 @@
       ]
     },
     {
-      "name": "CreateApiTokenBody",
-      "fields": [
-        {
-          "name": "name",
-          "type": "string",
-          "omitEmpty": false
-        }
-      ]
-    },
-    {
-      "name": "GetAllApiTokens",
-      "fields": [
-        {
-          "name": "tokens",
-          "type": "[]ApiToken",
-          "omitEmpty": false
-        }
-      ]
-    },
-    {
-      "name": "Page",
-      "fields": [
-        {
-          "name": "page",
-          "type": "int",
-          "omitEmpty": false
-        },
-        {
-          "name": "perPage",
-          "type": "int",
-          "omitEmpty": false
-        },
-        {
-          "name": "totalItems",
-          "type": "int",
-          "omitEmpty": false
-        },
-        {
-          "name": "totalPages",
-          "type": "int",
-          "omitEmpty": false
-        }
-      ]
-    },
-    {
       "name": "MediaPart",
       "fields": [
         {
@@ -272,36 +537,11 @@
       ]
     },
     {
-      "name": "Collection",
+      "name": "AddPart",
       "fields": [
         {
-          "name": "id",
-          "type": "string",
-          "omitEmpty": false
-        },
-        {
-          "name": "collectionType",
-          "type": "string",
-          "omitEmpty": false
-        },
-        {
-          "name": "coverUrl",
-          "type": "*string",
-          "omitEmpty": false
-        },
-        {
-          "name": "logoUrl",
-          "type": "*string",
-          "omitEmpty": false
-        },
-        {
-          "name": "bannerUrl",
-          "type": "*string",
-          "omitEmpty": false
-        },
-        {
-          "name": "name",
-          "type": "string",
+          "name": "index",
+          "type": "int",
           "omitEmpty": false
         }
       ]
@@ -317,27 +557,147 @@
       ]
     },
     {
-      "name": "ChangePasswordBody",
+      "name": "GetMediaParts",
       "fields": [
         {
-          "name": "currentPassword",
+          "name": "parts",
+          "type": "[]MediaPart",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "CreateMediaBody",
+      "fields": [
+        {
+          "name": "mediaType",
           "type": "string",
           "omitEmpty": false
         },
         {
-          "name": "newPassword",
+          "name": "tmdbId",
           "type": "string",
           "omitEmpty": false
         },
         {
-          "name": "newPasswordConfirm",
+          "name": "imdbId",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "malId",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "anilistId",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "score",
+          "type": "float",
+          "omitEmpty": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "rating",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "airingSeason",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "startDate",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "endDate",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "partCount",
+          "type": "int",
+          "omitEmpty": false
+        },
+        {
+          "name": "coverUrl",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "bannerUrl",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "logoUrl",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "tags",
+          "type": "[]string",
+          "omitEmpty": false
+        },
+        {
+          "name": "creators",
+          "type": "[]string",
+          "omitEmpty": false
+        },
+        {
+          "name": "collectionId",
+          "type": "string",
+          "omitEmpty": true
+        },
+        {
+          "name": "collectionName",
+          "type": "string",
+          "omitEmpty": true
+        }
+      ]
+    },
+    {
+      "name": "CreateCollection",
+      "fields": [
+        {
+          "name": "id",
           "type": "string",
           "omitEmpty": false
         }
       ]
     },
     {
-      "name": "GetMedia",
+      "name": "PartBody",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "GetCollections",
       "fields": [
         {
           "name": "page",
@@ -345,93 +705,8 @@
           "omitEmpty": false
         },
         {
-          "name": "media",
-          "type": "[]Media",
-          "omitEmpty": false
-        }
-      ]
-    },
-    {
-      "name": "SetMediaUserData",
-      "fields": [
-        {
-          "name": "list",
-          "type": "*string",
-          "omitEmpty": true
-        },
-        {
-          "name": "score",
-          "type": "*int",
-          "omitEmpty": true
-        },
-        {
-          "name": "currentPart",
-          "type": "*int",
-          "omitEmpty": true
-        },
-        {
-          "name": "revisitCount",
-          "type": "*int",
-          "omitEmpty": true
-        },
-        {
-          "name": "isRevisiting",
-          "type": "*bool",
-          "omitEmpty": true
-        }
-      ]
-    },
-    {
-      "name": "GetCollectionById",
-      "fields": [
-        {
-          "name": "id",
-          "type": "string",
-          "omitEmpty": false
-        },
-        {
-          "name": "collectionType",
-          "type": "string",
-          "omitEmpty": false
-        },
-        {
-          "name": "coverUrl",
-          "type": "*string",
-          "omitEmpty": false
-        },
-        {
-          "name": "logoUrl",
-          "type": "*string",
-          "omitEmpty": false
-        },
-        {
-          "name": "bannerUrl",
-          "type": "*string",
-          "omitEmpty": false
-        },
-        {
-          "name": "name",
-          "type": "string",
-          "omitEmpty": false
-        }
-      ]
-    },
-    {
-      "name": "CollectionGroup",
-      "fields": [
-        {
-          "name": "name",
-          "type": "string",
-          "omitEmpty": false
-        },
-        {
-          "name": "order",
-          "type": "int",
-          "omitEmpty": false
-        },
-        {
-          "name": "entries",
-          "type": "[]CollectionItem",
+          "name": "collections",
+          "type": "[]Collection",
           "omitEmpty": false
         }
       ]
@@ -520,7 +795,7 @@
           "omitEmpty": false
         },
         {
-          "name": "studios",
+          "name": "creators",
           "type": "[]string",
           "omitEmpty": false
         },
@@ -567,31 +842,91 @@
       ]
     },
     {
-      "name": "SignupBody",
+      "name": "ChangePasswordBody",
       "fields": [
         {
-          "name": "username",
+          "name": "currentPassword",
           "type": "string",
           "omitEmpty": false
         },
         {
-          "name": "password",
+          "name": "newPassword",
           "type": "string",
           "omitEmpty": false
         },
         {
-          "name": "passwordConfirm",
+          "name": "newPasswordConfirm",
           "type": "string",
           "omitEmpty": false
         }
       ]
     },
     {
-      "name": "GetSystemInfo",
+      "name": "GetMedia",
       "fields": [
         {
-          "name": "version",
+          "name": "page",
+          "type": "Page",
+          "omitEmpty": false
+        },
+        {
+          "name": "media",
+          "type": "[]Media",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "SetMediaUserData",
+      "fields": [
+        {
+          "name": "list",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "score",
+          "type": "*int",
+          "omitEmpty": true
+        },
+        {
+          "name": "currentPart",
+          "type": "*int",
+          "omitEmpty": true
+        },
+        {
+          "name": "revisitCount",
+          "type": "*int",
+          "omitEmpty": true
+        },
+        {
+          "name": "isRevisiting",
+          "type": "*bool",
+          "omitEmpty": true
+        }
+      ]
+    },
+    {
+      "name": "AddCollectionItemBody",
+      "fields": [
+        {
+          "name": "mediaId",
           "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "searchSlug",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "order",
+          "type": "int",
           "omitEmpty": false
         }
       ]
@@ -601,6 +936,21 @@
       "fields": [
         {
           "name": "token",
+          "type": "string",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "ApiToken",
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "name",
           "type": "string",
           "omitEmpty": false
         }
@@ -622,6 +972,26 @@
         {
           "name": "description",
           "type": "*string",
+          "omitEmpty": false
+        },
+        {
+          "name": "tmdbId",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "imdbId",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "malId",
+          "type": "string",
+          "omitEmpty": false
+        },
+        {
+          "name": "anilistId",
+          "type": "string",
           "omitEmpty": false
         },
         {
@@ -665,7 +1035,7 @@
           "omitEmpty": false
         },
         {
-          "name": "studios",
+          "name": "creators",
           "type": "[]string",
           "omitEmpty": false
         },
@@ -697,101 +1067,106 @@
       ]
     },
     {
-      "name": "GetCollections",
+      "name": "CreateMedia",
       "fields": [
         {
-          "name": "page",
-          "type": "Page",
-          "omitEmpty": false
-        },
-        {
-          "name": "collections",
-          "type": "[]Collection",
+          "name": "id",
+          "type": "string",
           "omitEmpty": false
         }
       ]
     },
     {
-      "name": "ProviderMyAnimeListAnime",
+      "name": "SetPartsBody",
       "fields": [
         {
-          "name": "malId",
+          "name": "parts",
+          "type": "[]PartBody",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "GetCollectionById",
+      "fields": [
+        {
+          "name": "id",
           "type": "string",
           "omitEmpty": false
         },
         {
-          "name": "mediaType",
+          "name": "collectionType",
           "type": "string",
           "omitEmpty": false
         },
         {
-          "name": "title",
-          "type": "string",
-          "omitEmpty": false
-        },
-        {
-          "name": "titleEnglish",
-          "type": "string",
-          "omitEmpty": false
-        },
-        {
-          "name": "description",
-          "type": "string",
-          "omitEmpty": false
-        },
-        {
-          "name": "score",
-          "type": "*float",
-          "omitEmpty": false
-        },
-        {
-          "name": "status",
-          "type": "string",
-          "omitEmpty": false
-        },
-        {
-          "name": "rating",
-          "type": "string",
-          "omitEmpty": false
-        },
-        {
-          "name": "airingSeason",
-          "type": "string",
-          "omitEmpty": false
-        },
-        {
-          "name": "startDate",
+          "name": "coverUrl",
           "type": "*string",
           "omitEmpty": false
         },
         {
-          "name": "endDate",
+          "name": "logoUrl",
           "type": "*string",
           "omitEmpty": false
         },
         {
-          "name": "studios",
-          "type": "[]string",
+          "name": "bannerUrl",
+          "type": "*string",
           "omitEmpty": false
         },
         {
-          "name": "tags",
-          "type": "[]string",
+          "name": "name",
+          "type": "string",
           "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "EditCollectionBody",
+      "fields": [
+        {
+          "name": "collectionType",
+          "type": "*string",
+          "omitEmpty": true
         },
         {
-          "name": "coverImageUrl",
+          "name": "name",
+          "type": "*string",
+          "omitEmpty": true
+        },
+        {
+          "name": "adminStatus",
+          "type": "*string",
+          "omitEmpty": true
+        }
+      ]
+    },
+    {
+      "name": "SignupBody",
+      "fields": [
+        {
+          "name": "username",
           "type": "string",
           "omitEmpty": false
         },
         {
-          "name": "episodeCount",
-          "type": "*int",
+          "name": "password",
+          "type": "string",
           "omitEmpty": false
         },
         {
-          "name": "usingCache",
-          "type": "bool",
+          "name": "passwordConfirm",
+          "type": "string",
+          "omitEmpty": false
+        }
+      ]
+    },
+    {
+      "name": "GetSystemInfo",
+      "fields": [
+        {
+          "name": "version",
+          "type": "string",
           "omitEmpty": false
         }
       ]
@@ -911,6 +1286,61 @@
     },
     {
       "type": "api",
+      "name": "DeleteMediaUserData",
+      "method": "DELETE",
+      "path": "/api/v1/media/:id/user"
+    },
+    {
+      "type": "api",
+      "name": "CreateMedia",
+      "method": "POST",
+      "path": "/api/v1/media",
+      "response": "CreateMedia",
+      "body": "CreateMediaBody"
+    },
+    {
+      "type": "api",
+      "name": "EditMedia",
+      "method": "PATCH",
+      "path": "/api/v1/media/:id",
+      "body": "EditMediaBody"
+    },
+    {
+      "type": "form",
+      "name": "ChangeMediaImages",
+      "method": "PATCH",
+      "path": "/api/v1/media/:id/images"
+    },
+    {
+      "type": "api",
+      "name": "AddPart",
+      "method": "POST",
+      "path": "/api/v1/media/:id/single/parts",
+      "response": "AddPart",
+      "body": "AddPartBody"
+    },
+    {
+      "type": "api",
+      "name": "EditPart",
+      "method": "PATCH",
+      "path": "/api/v1/media/:id/parts/:index",
+      "body": "EditPartBody"
+    },
+    {
+      "type": "api",
+      "name": "RemovePart",
+      "method": "DELETE",
+      "path": "/api/v1/media/:id/parts/:index"
+    },
+    {
+      "type": "api",
+      "name": "SetParts",
+      "method": "POST",
+      "path": "/api/v1/media/:id/parts",
+      "body": "SetPartsBody"
+    },
+    {
+      "type": "api",
       "name": "GetCollections",
       "method": "GET",
       "path": "/api/v1/collections",
@@ -932,6 +1362,34 @@
     },
     {
       "type": "api",
+      "name": "CreateCollection",
+      "method": "POST",
+      "path": "/api/v1/collections",
+      "response": "CreateCollection",
+      "body": "CreateCollectionBody"
+    },
+    {
+      "type": "api",
+      "name": "EditCollection",
+      "method": "PATCH",
+      "path": "/api/v1/collections/:id",
+      "body": "EditCollectionBody"
+    },
+    {
+      "type": "form",
+      "name": "ChangeCollectionImages",
+      "method": "PATCH",
+      "path": "/api/v1/collections/:id/images"
+    },
+    {
+      "type": "api",
+      "name": "AddCollectionItem",
+      "method": "POST",
+      "path": "/api/v1/collections/:id/items",
+      "body": "AddCollectionItemBody"
+    },
+    {
+      "type": "api",
       "name": "ProviderMyAnimeListGetAnime",
       "method": "GET",
       "path": "/api/v1/provider/myanimelist/anime/:id",
@@ -941,13 +1399,13 @@
       "type": "normal",
       "name": "GetMediaImage",
       "method": "GET",
-      "path": "/files/media/:id/:image"
+      "path": "/files/media/:id/images/:file"
     },
     {
       "type": "normal",
       "name": "GetCollectionImage",
       "method": "GET",
-      "path": "/files/collections/:id/:image"
+      "path": "/files/collections/:id/images/:file"
     }
   ]
 }
